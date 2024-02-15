@@ -1,5 +1,4 @@
-﻿
-@model CarInsurance.Models.Insuree
+﻿@model IEnumerable <CarInsurance.Models.Insuree>
 
 @{
     ViewBag.Title = "Admin View";
@@ -19,12 +18,8 @@
         <tr>
             <td>@insuree.FirstName</td>
             <td>@insuree.LastName</td>
-            <td>@insuree.Email</td>
+            <td>@insuree.EmailAddress</td>
             <td>@insuree.Quote.ToString("C")</td>
         </tr>
     }
 </table>
-
-
-<h2>Admin</h2>
-

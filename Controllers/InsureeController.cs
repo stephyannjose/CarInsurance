@@ -114,6 +114,7 @@ namespace CarInsurance.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        // GET: Insuree/Admin
         public ActionResult Admin()
         {
             var quotes = db.Insurees.ToList(); // Retrieve all quotes issued
