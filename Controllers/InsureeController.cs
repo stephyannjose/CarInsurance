@@ -50,12 +50,33 @@ namespace CarInsurance.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Calculate quote
+                insuree.Quote = (decimal)InsuranceQuoteCalculator.CalculateQuote(
+                    CalculateAge(insuree.DateOfBirth),
+                    insuree.CarYear,
+                    insuree.CarMake,
+                    insuree.CarModel,
+                    insuree.SpeedingTickets,
+                    insuree.DUI,
+                    insuree.CoverageType// Use CoverageType directly if it's a boolean
+                );
+
+
+                // Add insuree to database
                 db.Insurees.Add(insuree);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             return View(insuree);
+        }
+        // Helper method to calculate age based on date of birth
+        private int CalculateAge(DateTime dateOfBirth)
+        {
+            int age = DateTime.Today.Year - dateOfBirth.Year;
+            if (dateOfBirth > DateTime.Today.AddYears(-age))
+                age--;
+            return age;
         }
 
         // GET: Insuree/Edit/5
